@@ -208,6 +208,10 @@ p {
 }
 
 @media screen and (max-width: 780px) {
+	.more_info_img img {
+	    max-width: 300px;
+	    max-height: 300px;
+	}
     .more_info_info {
     	max-width: unset;
     }
