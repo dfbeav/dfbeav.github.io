@@ -171,6 +171,7 @@ p {
 #more_info_box {
 	display: inline-flex;
 	flex-wrap: wrap;
+	justify-content: center;
 	align-items: flex-start;
 	padding: 15px;
 	border-radius: 4px;
@@ -204,6 +205,12 @@ p {
 	max-width: 400px;
 	box-sizing: border-box;
 	padding: 15px;
+}
+
+@media screen and (max-width: 780px) {
+    .more_info_info {
+    	max-width: unset;
+    }
 }
 
 .fake_buy_btn {
