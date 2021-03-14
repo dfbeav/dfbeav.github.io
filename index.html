@@ -1,0 +1,255 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Space Beaver | Online Store</title>
+  <meta name="description" content="Space Beaver | Online Store">
+  <meta name="author" content="David Beaver">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+	
+
+	<div id="header_search">
+
+		<div id="logo">
+			<img src="images/logo.svg">
+		</div>
+
+		<div id="category_selection">
+			<div class="header_text">
+				<p>Select categories below to filter</p>
+			</div>
+			<div id="cat_elec" class="cat_option" onclick="addClass('cat_elec')">
+				<p>Electronics</p>
+			</div>
+			<div id="cat_jewe" class="cat_option" onclick="addClass('cat_jewe')">
+				<p>Jewelery</p>
+			</div>
+			<div id="cat_mecl" class="cat_option" onclick="addClass('cat_mecl')">
+				<p>Men Clothing</p>
+			</div>
+			<div id="cat_wocl" class="cat_option" onclick="addClass('cat_wocl')">
+				<p>Women Clothing</p>
+			</div>
+			<div id="cat_all" class="cat_option" onclick="removeClasses()">
+				<p>All</p>
+			</div>
+		</div>
+		
+	</div>
+
+
+	<div id="products">
+
+		<div id="more_info_container">
+			<!-- Dynamically generated "#More_Info_Box" goes here -->
+		</div>
+
+		<!--Placeholders until JSON is fetched -->
+		<div class="prod_box prod_placeholder">
+			<div class="prod_img">
+			</div>
+    		<h3>&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;</h3>
+    		<div class="prod_bottom">
+    			<h4>$&#9608;&#9608;.&#9608;&#9608;</h4>
+    			<div class="view_more_btn"><p>&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;</p></div>
+    		</div>
+		</div>
+		<div class="prod_box prod_placeholder">
+			<div class="prod_img">
+			</div>
+    		<h3>&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;</h3>
+    		<div class="prod_bottom">
+    			<h4>$&#9608;&#9608;.&#9608;&#9608;</h4>
+    			<div class="view_more_btn"><p>&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;</p></div>
+    		</div>
+		</div>
+		<div class="prod_box prod_placeholder">
+			<div class="prod_img">
+			</div>
+    		<h3>&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;</h3>
+    		<div class="prod_bottom">
+    			<h4>$&#9608;&#9608;.&#9608;&#9608;</h4>
+    			<div class="view_more_btn"><p>&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;</p></div>
+    		</div>
+		</div>
+		<div class="prod_box prod_placeholder">
+			<div class="prod_img">
+			</div>
+    		<h3>&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;</h3>
+    		<div class="prod_bottom">
+    			<h4>$&#9608;&#9608;.&#9608;&#9608;</h4>
+    			<div class="view_more_btn"><p>&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;</p></div>
+    		</div>
+		</div>
+		<div class="prod_box prod_placeholder">
+			<div class="prod_img">
+			</div>
+    		<h3>&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;</h3>
+    		<div class="prod_bottom">
+    			<h4>$&#9608;&#9608;.&#9608;&#9608;</h4>
+    			<div class="view_more_btn"><p>&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;</p></div>
+    		</div>
+		</div>
+		<div class="prod_box prod_placeholder">
+			<div class="prod_img">
+			</div>
+    		<h3>&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;</h3>
+    		<div class="prod_bottom">
+    			<h4>$&#9608;&#9608;.&#9608;&#9608;</h4>
+    			<div class="view_more_btn"><p>&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;</p></div>
+    		</div>
+		</div>
+		<!-- END Placeholders -->
+
+	</div>
+
+
+	<div id="footer">
+		<p>Created by David Beaver</p>
+	</div>
+	
+
+
+
+	<script type="text/javascript">
+
+		//Commonly referenced element
+		var product_section = document.getElementById("products");
+
+		//Process prices (add ending zero if there is none)
+		function processPrices(itemprice) {
+			var priceCents = itemprice.toString();
+			if (priceCents.substring(priceCents.indexOf(".") + 1).length < 2) {
+				var processedPrice = itemprice + "0";
+				return processedPrice;
+			} else {
+				var processedPrice = itemprice;
+				return processedPrice;
+			}
+		}
+			
+
+		//Fetch API store data
+			fetch('https://fakestoreapi.com/products')
+	            .then(res=>res.json())
+	            .then(function(json) {
+
+	            	//make data global
+	            	window.item = json;
+
+	            	//Iterate over each object and generate product elements
+	            	json.forEach(
+						(item)=> {
+							//Create new element
+							var newProdCard = document.createElement("div");
+							newProdCard.classList.add("prod_box");
+
+							//Process prices
+							var newPrice = processPrices(item.price);
+
+							//change category data to css-friendly name (no-spaces)
+							var catClass = item.category.replace(" ", "_");
+							newProdCard.classList.add(catClass);
+							
+							
+
+							//Construct new product element
+							newProdCard.innerHTML = `
+									<div class="prod_img ${catClass}">
+										<img src="${item.image}">
+									</div>
+						    		<h3>${item.title}</h3>
+						    		<div class="prod_bottom">
+						    			<h4>$${newPrice}</h4>
+						    			<div class="view_more_btn"><p onclick="moreInfo('${item.id}')">View Product</p></div>
+						    		</div>
+							`;
+
+							//Append new product card element to #products
+							product_section.append(newProdCard);
+
+						   }
+	            		);
+
+	            	//Add Class to #products section to hide placeholders
+	            	product_section.classList.add("products_returned");
+
+	            });
+
+            
+
+        //Category Buttons
+        	function addClass(category){
+        		//Remove all category classes
+				removeClasses();
+				//Add class ("cat_elec", "cat_jewe", "cat_mecl", or "cat_wocl") to #products section that hides products of another category
+				product_section.classList.add(category);
+			}
+
+            function removeClasses() {
+            	product_section.classList.remove('cat_elec');
+            	product_section.classList.remove('cat_jewe');
+            	product_section.classList.remove('cat_mecl');
+            	product_section.classList.remove('cat_wocl');
+            }
+
+            
+
+
+
+		//More Info Btns
+			function moreInfo(prod_id) {
+				//Create new element
+				var moreInfoCard = document.createElement("div");
+				moreInfoCard.id = "more_info_box";
+
+				//Process prices
+				var newPrice = processPrices(item[prod_id-1].price);
+
+				//Construct new product element
+				moreInfoCard.innerHTML = `
+				<div class="more_info_img">
+					<img src="${item[prod_id-1].image}">
+				</div>
+				<div class="more_info_info">
+					<div class="more_info_exit">
+						<p onclick="closeMoreInfo()">x</p>
+					</div>
+		    		<h3>${item[prod_id-1].title}</h3>
+		    		<h4>$${newPrice}</h4>
+		    		<p>${item[prod_id-1].description}</p>
+		    		<p><em><strong>Category: </strong>${item[prod_id-1].category}</em></p>
+		    		<div class="fake_buy_btn">Buy</div>
+		    	</div>
+				`;
+
+				//Append new element
+				 document.getElementById("more_info_container").append(moreInfoCard);
+
+				//Unhide section
+			   product_section.classList.add('moreInfo')
+			};
+
+			//Close More Info
+			function closeMoreInfo(){
+				document.getElementById("more_info_box").remove();
+				product_section.classList.remove('moreInfo');
+			}
+
+
+	</script>
+
+</body>
+</html>
